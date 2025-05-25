@@ -55,7 +55,8 @@ export default class Hexagon extends AbstractShape {
 
         this.damagePerTick = isAlpha ? 100 : 18;
         this.scoreReward = isAlpha ? 100000 : 500;
-        
+        if (isAlpha) // Show name UI for alpha pentagons
+		this.nameData.values.flags ^= NameFlags.hiddenName;
         if (shiny) {
             this.scoreReward *= 100;
             this.healthData.values.health = this.healthData.values.maxHealth *= 10;
