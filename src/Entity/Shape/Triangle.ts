@@ -47,7 +47,8 @@ export default class Triangle extends AbstractShape {
         this.scoreReward = (isAlpha ? 1500 : 25);
         this.isShiny = shiny;
         this.isAlpha = isAlpha;
-        
+          if (isAlpha) // Show name UI for alpha pentagons
+		this.nameData.values.flags ^= NameFlags.hiddenName;
         if (shiny) {
             this.scoreReward *= 100;
             this.healthData.values.health = this.healthData.values.maxHealth *= 10;
