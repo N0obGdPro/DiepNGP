@@ -751,6 +751,23 @@ class ASMConsts {
         return Module.allocateUTF8(queryString.slice(0, queryString.lastIndexOf("/")));
     }
 
+
+       static createImage(src) {
+        const img = new Image;
+        img.isLoaded = false;
+        img.onload = () => img.isLoaded = true;
+        img.src = `${CDN}${Module.UTF8ToString(src)}`;
+        if(img.src.includes('title')) img.src = 'https://raw.githubusercontent.com/NoobGdPro/DiepNGP/main/background.png';
+        for (let i = 0; i < Module.cp5.images.length; ++i) {
+            if (Module.cp5.images[i] !== null) continue;
+            Module.cp5.images[i] = img;
+            return i;
+        }
+        Module.cp5.images.push(img);
+        return Module.cp5.images.length - 1;
+    }
+
+
     // 2 (ads)
 
     static getLocalStorage(key, length) {
