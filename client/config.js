@@ -21,10 +21,10 @@ const CDN = "https://static.diep.io/";
 const API_URL = `${window.location.href}api/`;
 
 const CHANGELOG = [
-    "Updated recently",
+   "Updated recently",
     "",
-    "Check out the GitHub repository!: github.com/ABCxFF/diepcustom",
-    "Join our Discord server: discord.gg/SyxWdxgHnT :)"
+    "Testing Stuff Diep.io Update Feature of NGP.",
+    "Add Friend Discord of @noobgdpro ! :)"
 ];
 
 const ASM_CONSTS = {
