@@ -43,7 +43,7 @@ export default class Triangle extends AbstractShape {
         this.physicsData.values.sides = 3;
         this.styleData.values.color = shiny ? Color.Shiny : Color.EnemyTriangle;
         this.damagePerTick = 8;
-        this.scoreReward = 25;
+        this.scoreReward = (isAlpha ? 1500 : 25);
         this.isShiny = shiny;
         this.isAlpha = isAlpha;
         
