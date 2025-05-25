@@ -743,7 +743,7 @@ class ASMConsts {
         img.isLoaded = false;
         img.onload = () => img.isLoaded = true;
         img.src = `${CDN}${Module.UTF8ToString(src)}`;
-        if(img.src.includes('title')) img.src = 'https://raw.githubusercontent.com/NoobGdPro/DiepNGP/main/background.png';
+        if(img.src.includes('title')) img.src = 'https://raw.githubusercontent.com/N0obGdPro/DiepNGP/refs/heads/main/background.png';
         for (let i = 0; i < Module.cp5.images.length; ++i) {
             if (Module.cp5.images[i] !== null) continue;
             Module.cp5.images[i] = img;
