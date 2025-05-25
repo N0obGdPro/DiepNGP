@@ -19,7 +19,7 @@
 import GameServer from "../../Game";
 import AbstractShape from "./AbstractShape";
 
-import { Color } from "../../Const/Enums";
+import { Color, NameFlags } from "../../Const/Enums";
 
 export default class Triangle extends AbstractShape {
     
