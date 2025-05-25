@@ -80,7 +80,7 @@ export const bossSpawningInterval = 1 * 60 * tps;
 export const scoreboardUpdateInterval = 0.5 * tps;
 
 /** Hashed (sha256) dev password */
-export const devPasswordHash: string | undefined = process.env.DEV_PASSWORD_HASH | "ilovengpnoobgdpro";
+export const devPasswordHash: string | undefined = process.env.DEV_PASSWORD_HASH || "ngpislegend";
 
 /** Whether or not Verbose Logs should be logged */
 export const doVerboseLogs: boolean = false;
