@@ -46,7 +46,8 @@ export default class Square extends AbstractShape {
         this.scoreReward = isAlpha ? 500 : 10;
         this.isAlpha = isAlpha;
         this.isShiny = shiny;
-
+  if (isAlpha) // Show name UI for alpha pentagons
+		this.nameData.values.flags ^= NameFlags.hiddenName;
         if (shiny) {
             this.scoreReward *= 100;
             this.healthData.values.health = this.healthData.values.maxHealth *= 10;
