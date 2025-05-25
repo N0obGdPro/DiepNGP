@@ -29,7 +29,7 @@ export default class Square extends AbstractShape {
     protected static BASE_ORBIT = AbstractShape.BASE_ORBIT / 2;
     protected static BASE_VELOCITY = AbstractShape.BASE_VELOCITY / 2;
     
-    public constructor(game: GameServer, isAlpha=false, shiny=(Math.random() < 0.001) && !isAlpha) {
+    public constructor(game: GameServer, isAlpha=false, shiny=(Math.random() < 0.01) && !isAlpha) {
         super(game);
         this.nameData.values.name = isAlpha ? "Alpha Square" : "Square";
         this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 100 : 10);
