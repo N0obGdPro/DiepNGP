@@ -152,10 +152,16 @@ app.listen(PORT, (success) => {
     // RULES(0): No two game servers should share the same endpoint
     //
     // NOTES(0): As of now, both servers run on the same process (and thread) here
-    const ffa = new GameServer("ffa", "Free For All");
-    const sbx = new GameServer("sandbox", "Create Room");
     
-    games.push(ffa, sbx);
+    const sbx = new GameServer("sandbox", "Create Room");
+    const ffa = new GameServer("ffa", "Free For All");
+    const maze = new GameServer("maze", "Maze");
+    const mothers = new GameServer("mot", "2 Motherships");
+    const twoteam = new GameServer("teams", "Two Teams");
+    const fourteam = new GameServer("4teams", "Four Teams");
+    const dominator = new GameServer("dom", "Domination");
+    
+    games.push(sbx, ffa, maze, mothers, twoteam, fourteam, dominator);
 
     util.saveToLog("Servers up", "All servers booted up.", 0x37F554);
     util.log("Dumping endpoint -> gamemode routing table");
