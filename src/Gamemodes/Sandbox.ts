@@ -26,7 +26,7 @@ import { ArenaFlags } from "../Const/Enums";
  * Manage shape count
 */
 export class SandboxShapeManager extends ShapeManager {
-    
+    /*
     protected get wantedShapes() {
         let i = 0;
         for (const client of this.game.clients) {
@@ -34,7 +34,7 @@ export class SandboxShapeManager extends ShapeManager {
         }
         return Math.floor(i * 30);
     }
-        
+       */ 
 }
 
 /**
