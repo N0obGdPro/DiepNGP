@@ -26,22 +26,22 @@ import { ArenaFlags } from "../Const/Enums";
  * Manage shape count
 */
 export class SandboxShapeManager extends ShapeManager {
-    /*
+    
     protected get wantedShapes() {
         let i = 0;
         for (const client of this.game.clients) {
             if (client.camera) i += 1;
         }
-        return Math.floor(i * 12.5);
+        return Math.floor(i * 30);
     }
-        */
+        
 }
 
 /**
  * Sandbox Gamemode Arena
  */
 export default class SandboxArena extends ArenaEntity {
-    /** Limits shape count to floor(12.5 * player count) */
+    /** Limits shape count to floor(30 * player count) */
 	protected shapes: ShapeManager = new SandboxShapeManager(this);
 
     public constructor(game: GameServer) {
@@ -53,7 +53,7 @@ export default class SandboxArena extends ArenaEntity {
     }
 
     public tick(tick: number) {
-		const arenaSize = Math.floor(25 * Math.sqrt(Math.max(this.game.clients.size, 1))) * 100;
+		const arenaSize = Math.floor(60 * Math.sqrt(Math.max(this.game.clients.size, 1))) * 100;
 		if (this.width !== arenaSize || this.height !== arenaSize) this.updateBounds(arenaSize, arenaSize);
 
         super.tick(tick);
