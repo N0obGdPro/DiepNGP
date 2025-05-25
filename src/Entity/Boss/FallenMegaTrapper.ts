@@ -16,13 +16,13 @@
     along with this program. If not, see <https://www.gnu.org/licenses/>
 */
 
-import GameServer from "../../../Game";
-import Barrel from "../../Tank/Barrel";
-import TankDefinitions from "../../../Const/TankDefinitions";
-import AbstractBoss from "../../Boss/AbstractBoss";
+import GameServer from "../../Game";
+import Barrel from "../Tank/Barrel";
+import TankDefinitions from "../../Const/TankDefinitions";
+import AbstractBoss from "../Boss/AbstractBoss";
 
-import { Tank } from "../../../Const/Enums";
-import { AIState } from "../../AI";
+import { Tank } from "../../Const/Enums";
+import { AIState } from "../AI";
 
 /**
  * Class which represents the boss "FallenBooster"
