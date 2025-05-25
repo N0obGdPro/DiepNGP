@@ -686,20 +686,7 @@ class ASMConsts {
         return Module.cp5.contexts.length - 1;
     }
 
-    static createImage(src) {
-        const img = new Image;
-        img.isLoaded = false;
-        img.onload = () => img.isLoaded = true;
-        img.src = `${CDN}${Module.UTF8ToString(src)}`;
-        for (let i = 0; i < Module.cp5.images.length; ++i) {
-            if (Module.cp5.images[i] !== null) continue;
-            Module.cp5.images[i] = img;
-            return i;
-        }
-        Module.cp5.images.push(img);
-        return Module.cp5.images.length - 1;
-    }
-
+    
     static websocketSend(socketId, packetStart, packetLength) {
         const socket = Module.cp5.sockets[socketId];
         if(!socket || socket.readyState !== 1) return 0;
@@ -751,8 +738,7 @@ class ASMConsts {
         return Module.allocateUTF8(queryString.slice(0, queryString.lastIndexOf("/")));
     }
 
-
-       static createImage(src) {
+    static createImage(src) {
         const img = new Image;
         img.isLoaded = false;
         img.onload = () => img.isLoaded = true;
@@ -766,6 +752,9 @@ class ASMConsts {
         Module.cp5.images.push(img);
         return Module.cp5.images.length - 1;
     }
+
+
+     
 
 
     // 2 (ads)
