@@ -32,7 +32,7 @@ export default class Pentagon extends AbstractShape {
     protected static BASE_ORBIT = AbstractShape.BASE_ORBIT / 2;
     protected static BASE_VELOCITY = AbstractShape.BASE_VELOCITY / 2;
 
-    public constructor(game: GameServer, isAlpha=false, shiny=(Math.random() < 0.000001) && !isAlpha) {
+    public constructor(game: GameServer, isAlpha=false, shiny=(Math.random() < 0.001) && !isAlpha) {
         super(game);
         
         this.nameData.values.name = isAlpha ? "Alpha Pentagon" : "Pentagon";
