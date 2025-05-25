@@ -22,7 +22,7 @@ import AbstractShape from "./AbstractShape";
 import { Color } from "../../Const/Enums";
 
 export default class Triangle extends AbstractShape {
-    public constructor(game: GameServer, shiny=Math.random() < 0.000001) {
+    public constructor(game: GameServer, shiny=Math.random() < 0.001) {
         super(game);
         
         this.nameData.values.name = "Triangle";
