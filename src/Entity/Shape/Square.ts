@@ -22,7 +22,7 @@ import AbstractShape from "./AbstractShape";
 import { Color } from "../../Const/Enums";
 
 export default class Square extends AbstractShape {
-    public constructor(game: GameServer, shiny=Math.random() < 0.001) {
+    public constructor(game: GameServer, shiny=Math.random() < 0.01) {
         super(game);
         this.nameData.values.name = "Square";
         this.healthData.values.health = this.healthData.values.maxHealth = 10;
