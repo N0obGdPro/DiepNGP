@@ -269,6 +269,7 @@ export const commandCallbacks = {
             ["FallenSpike", FallenSpike],
             ["ArenaCloser", ArenaCloser],
             ["Crasher", Crasher],
+            ["Hexagon", Hexagon],
             ["Pentagon", Pentagon],
             ["Square", Square],
             ["Triangle", Triangle]
