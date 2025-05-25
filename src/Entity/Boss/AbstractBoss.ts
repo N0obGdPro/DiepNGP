@@ -22,7 +22,7 @@ import Barrel from "../Tank/Barrel";
 import { ClientBound, Color, PositionFlags } from "../../Const/Enums";
 import { VectorAbstract } from "../../Physics/Vector";
 import { AI, AIState, Inputs } from "../AI";
-import { NameGroup } from "../../Native/FieldGroups";
+import { NameGroup, ScoreGroup } from "../../Native/FieldGroups";
 import LivingEntity from "../Live";
 import TankBody from "../Tank/TankBody";
 import { CameraEntity } from "../../Native/Camera";
@@ -89,6 +89,8 @@ class BossMovementControl {
 export default class AbstractBoss extends LivingEntity {
     /** Always existant name field group, present in all bosses. */
     public nameData: NameGroup = new NameGroup(this);
+	/** custom lb score */
+    public scoreData: ScoreGroup = new ScoreGroup(this);
     /** Alternate name, eg Guardian and Guardian of the Pentagons to appear in notifications" */
     public altName: string | null = null;
     /** The reload time calculation property. Used for calculating reload of barrels. */
@@ -124,7 +126,7 @@ export default class AbstractBoss extends LivingEntity {
 
         this.physicsData.values.absorbtionFactor = 0.05;
         this.positionData.values.flags |= PositionFlags.absoluteRotation;
-        this.scoreReward = 30000 * this.game.arena.shapeScoreRewardMultiplier;
+        this.scoreReward = this.scoreData.values.score = 30000 * this.game.arena.shapeScoreRewardMultiplier;
         this.damagePerTick = 60;
 
         this.ai = new AI(this);
@@ -150,6 +152,13 @@ export default class AbstractBoss extends LivingEntity {
     // For map wide movement
     protected moveAroundMap() {
         this.movementControl.moveBoss();
+    }
+	
+	public onKill(killedEntity: LivingEntity) {
+        if (killedEntity.scoreData instanceof ScoreGroup) {
+          this.scoreReward += killedEntity.scoreData.values.score;
+          this.scoreData.score = this.scoreReward;
+        }
     }
 
     /** See LivingEntity.onDeath
