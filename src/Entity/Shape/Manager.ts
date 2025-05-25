@@ -20,6 +20,7 @@ import ArenaEntity from "../../Native/Arena";
 import GameServer from "../../Game";
 
 import Crasher from "./Crasher";
+import Hexagon from "./Hexagon";
 import Pentagon from "./Pentagon";
 import Triangle from "./Triangle";
 import Square from "./Square";
@@ -53,7 +54,14 @@ export default class ShapeManager {
         const {x, y} = this.arena.findSpawnLocation();
         const rightX = this.arena.arenaData.values.rightX;
         const leftX = this.arena.arenaData.values.leftX;
-        if (Math.max(x, y) < rightX / 10 && Math.min(x, y) > leftX / 10) {
+        if (Math.max(x, y) < rightX / 15 && Math.min(x, y) > leftX / 15) {
+            // Hexagon Nest
+            shape = new Hexagon(this.game, Math.random() <= 0.05);
+
+            shape.positionData.values.x = x;
+            shape.positionData.values.y = y;
+            shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+        } else if (Math.max(x, y) < rightX / 10 && Math.min(x, y) > leftX / 10) {
             // Pentagon Nest
             shape = new Pentagon(this.game, Math.random() <= 0.05);
 
