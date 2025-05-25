@@ -41,7 +41,6 @@ export default class AbstractShape extends LivingEntity {
     protected static BASE_ORBIT = 0.005;
     /** The velocity of the shape's orbits. */
     protected static BASE_VELOCITY = 1;
-    
     /** Used to make the scoredata for the as */
     public scoreData: ScoreGroup = new ScoreGroup(this)
     /** Always existant name field group, present in all shapes. */
@@ -90,7 +89,7 @@ export default class AbstractShape extends LivingEntity {
     }
 
     public tick(tick: number) {
-
+        
         this.scoreData.values.score = this.scoreReward;
 
         if (!this.doIdleRotate) {
