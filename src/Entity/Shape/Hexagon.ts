@@ -32,13 +32,18 @@ export default class Hexagon extends AbstractShape {
     protected static BASE_ORBIT = AbstractShape.BASE_ORBIT / 2;
     protected static BASE_VELOCITY = AbstractShape.BASE_VELOCITY / 2;
 
-    public constructor(game: GameServer, isAlpha=false, shiny=(Math.random() < 0.001) && !isAlpha) {
+    public constructor(game: GameServer, isAlpha=false, alpha=(Math.random() < 0.035), shiny=(Math.random() < 0.01) && !isAlpha) {
+
+        if (alpha) {
+          isAlpha = true;
+        }
+        
         super(game);
         
-        this.nameData.values.name = isAlpha ? "Alpha Hexagon" : "Hexagon";
+        this.nameData.values.name = isAlpha ? "Omega Hexagon" : "Hexagon";
 
-        this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 10000 : 500);
-        this.physicsData.values.size = (isAlpha ? 300 : 100) * Math.SQRT1_2;
+        this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 25000 : 500);
+        this.physicsData.values.size = (isAlpha ? 500 : 100) * Math.SQRT1_2;
         this.physicsData.values.sides = 6;
         this.styleData.values.color = shiny ? Color.Shiny : Color.EnemyHexagon;
 
@@ -48,8 +53,8 @@ export default class Hexagon extends AbstractShape {
         this.isAlpha = isAlpha;
         this.isShiny = shiny;
 
-        this.damagePerTick = isAlpha ? 30 : 18;
-        this.scoreReward = isAlpha ? 8000 : 500;
+        this.damagePerTick = isAlpha ? 100 : 18;
+        this.scoreReward = isAlpha ? 100000 : 500;
         
         if (shiny) {
             this.scoreReward *= 100;
