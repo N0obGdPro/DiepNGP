@@ -1,6 +1,6 @@
 <br><br>
 <div align="center">
-<img src="./icon.png" width="20%" />
+<img src="./favicon.png" width="20%" />
 <h3> DIEP.IO NGP </h3>
 <p> An open source diep.io custom of NoobGdPro </p>
 </div>
