@@ -58,27 +58,4 @@ export default class SandboxArena extends ArenaEntity {
     }
 }
 
-/**
- * Ball Gamemode Arena
- */
-export default class SandboxArena extends ArenaEntity {
-    /** Controller of all shapes in the arena. */
-    protected shapes: CustomShapeManager = new CustomShapeManager(this);
 
-    public constructor(game: GameServer) {
-        super(game);
-
-        this.arenaData.values.flags |= ArenaFlags.canUseCheats;
-        this.updateBounds(2500, 2500);
-
-        const ball = new ObjectEntity(game);
-        ball.nameData = new NameGroup(ball);
-        ball.nameData.values.name = "im pacman"
-        ball.physicsData.values.sides = 1;
-        ball.styleData.values.color = Color.ScoreboardBar;
-        ball.physicsData.values.size = 100;
-        ball.physicsData.values.absorbtionFactor = 10;
-        ball.physicsData.values.flags |= PhysicsFlags.isBase | PhysicsFlags.noOwnTeamCollision;
-        ball.relationsData.values.team = ball;
-    }
-}
