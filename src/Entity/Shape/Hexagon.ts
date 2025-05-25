@@ -11,7 +11,7 @@ class Hexagon extends AbstractShape_1.default {
         this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 10000 : 500);
         this.physicsData.values.size = (isAlpha ? 300 : 100) * Math.SQRT1_2;
         this.physicsData.values.sides = 6;
-        this.styleData.values.color = shiny ? 7 : 5;
+        this.styleData.values.color = shiny ? 7 : 19;
         this.physicsData.values.absorbtionFactor = isAlpha ? 0.05 : 0.5;
         this.physicsData.values.pushFactor = 11;
         this.isAlpha = isAlpha;
