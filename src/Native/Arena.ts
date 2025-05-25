@@ -29,13 +29,18 @@ import { Color, ArenaFlags, ValidScoreboardIndex } from "../Const/Enums";
 import { PI2, saveToLog } from "../util";
 import { TeamGroupEntity } from "../Entity/Misc/TeamEntity";
 import Client from "../Client";
+import AbstractShape from "../Entity/Shape/AbstractShape";
+import Pentagon from "../Entity/Shape/Pentagon";
 import AbstractBoss from "../Entity/Boss/AbstractBoss";
 import Guardian from "../Entity/Boss/Guardian";
 import Summoner from "../Entity/Boss/Summoner";
 import FallenOverlord from "../Entity/Boss/FallenOverlord";
 import FallenBooster from "../Entity/Boss/FallenBooster";
 import Defender from "../Entity/Boss/Defender";
+
 import { bossSpawningInterval, scoreboardUpdateInterval } from "../config";
+
+const bosses = [Guardian, Summoner, FallenOverlord, FallenBooster, Defender];
 
 export const enum ArenaState {
 	/** Alive, open */
@@ -56,6 +61,7 @@ export default class ArenaEntity extends Entity implements TeamGroupEntity {
 	public arenaData: ArenaGroup = new ArenaGroup(this);
 	/** Always existant team field group. Present in all (or maybe just ffa) arenas. */
 	public teamData: TeamGroup = new TeamGroup(this);
+
 	/** Cached width of the arena. Not sent to the client directly. */
 	public width: number;
 	/** Cached height of the arena. Not sent to the client directly. */
@@ -70,9 +76,9 @@ export default class ArenaEntity extends Entity implements TeamGroupEntity {
 
 	/** The current boss spawned into the game */
 	public boss: AbstractBoss | null = null;
-
+	
 	/** Scoreboard leader */
-	public leader: TankBody | null = null;
+	public leader: TankBody| AbstractShape| AbstractBoss | null = null;
 
 	/** Controller of all shapes in the arena. */
 	protected shapes = new ShapeManager(this);
@@ -125,11 +131,17 @@ export default class ArenaEntity extends Entity implements TeamGroupEntity {
 	/**
 	 * Updates the scoreboard / leaderboard arena fields.
 	 */
-	protected updateScoreboard(scoreboardPlayers: TankBody[]) {
+	protected updateScoreboard(scoreboardPlayers: (TankBody | Pentagon | AbstractBoss)[]) {
+
 
 		const scoreboardCount = this.arenaData.scoreboardAmount = (this.arenaData.values.flags & ArenaFlags.hiddenScores) ? 0 : Math.min(scoreboardPlayers.length, 10);
 
 		if (scoreboardCount) {
+			scoreboardPlayers.sort((p1, p2) => p2.scoreData.values.score - p1.scoreData.values.score);
+
+			const leader = this.leader = scoreboardPlayers[0];
+			this.arenaData.leaderX = leader.positionData.values.x;
+			this.arenaData.leaderY = leader.positionData.values.y;
 			this.arenaData.flags |= ArenaFlags.showsLeaderArrow;
 			let i;
 			for (i = 0; i < scoreboardCount; ++i) {
@@ -140,7 +152,7 @@ export default class ArenaEntity extends Entity implements TeamGroupEntity {
 				this.arenaData.values.scoreboardNames[i as ValidScoreboardIndex] = player.nameData.values.name;
 				this.arenaData.values.scoreboardScores[i as ValidScoreboardIndex] = player.scoreData.values.score;
 				// _currentTank only since ts ignore
-				this.arenaData.values.scoreboardTanks[i as ValidScoreboardIndex] = player['_currentTank'];
+				this.arenaData.values.scoreboardTanks[i as ValidScoreboardIndex] = player instanceof TankBody ? player['_currentTank'] : -1;
 			}
 		} else if (this.arenaData.values.flags & ArenaFlags.showsLeaderArrow) this.arenaData.flags ^= ArenaFlags.showsLeaderArrow;
 	}
@@ -198,46 +210,44 @@ export default class ArenaEntity extends Entity implements TeamGroupEntity {
 
 	/** Spawns the boss into the arena */
 	protected spawnBoss() {
-		const TBoss = [Guardian, Summoner, FallenOverlord, FallenBooster, Defender]
-			[~~(Math.random() * 5)];
+		const TBoss = bosses[~~(Math.random() * bosses.length)];
 		
 		this.boss = new TBoss(this.game);
 	}
 
 	public tick(tick: number) {
 		this.shapes.tick();
-
 		if (this.allowBoss && this.game.tick >= 1 && (this.game.tick % bossSpawningInterval) === 0 && !this.boss) {
 			this.spawnBoss();
 		}
 
         if (this.state === ArenaState.CLOSED) return;
 
-		const players: TankBody[] = [];
+		if ((this.game.tick % scoreboardUpdateInterval) === 0) {
+			const players: (TankBody|Pentagon|AbstractBoss)[] = [];
 		
-		for (let id = 0; id <= this.game.entities.lastId; ++id) {
-			const entity = this.game.entities.inner[id];
+			for (let id = 0; id <= this.game.entities.lastId; ++id) {
+				const entity = this.game.entities.inner[id];
 			
-			if (Entity.exists(entity) && entity instanceof TankBody && entity.cameraEntity instanceof ClientCamera && entity.cameraEntity.cameraData.values.player === entity) players.push(entity);
+				//if (Entity.exists(entity) && entity instanceof TankBody && entity.cameraEntity instanceof ClientCamera && entity.cameraEntity.cameraData.values.player === entity) players.push(entity);
+				if (Entity.exists(entity) && (entity instanceof TankBody || entity instanceof Pentagon && entity.isAlpha || entity instanceof AbstractBoss)) players.push(entity);
+						// Sorts them too DONT FORGET
+				this.updateScoreboard(players);
 
-			players.sort((p1, p2) => p2.scoreData.values.score - p1.scoreData.values.score);
-			this.leader = players[0];
-			if (this.leader && this.arenaData.values.flags & ArenaFlags.showsLeaderArrow) {
-				this.arenaData.leaderX = this.leader.positionData.values.x;
-				this.arenaData.leaderY = this.leader.positionData.values.y;
+				if (players.length === 0 && this.state === ArenaState.CLOSING) {
+					this.state = ArenaState.CLOSED;
+
+					setTimeout(() => {
+						this.game.end();
+					}, 10000);
+					return;
+				}
 			}
 		}
 
-		// Sorts them too DONT FORGET
-		if ((this.game.tick % scoreboardUpdateInterval) === 0) this.updateScoreboard(players);
-
-		if (players.length === 0 && this.state === ArenaState.CLOSING) {
-			this.state = ArenaState.CLOSED;
-
-			setTimeout(() => {
-				this.game.end();
-			}, 10000);
-			return;
+		if (Entity.exists(this.leader)) {
+		    this.arenaData.leaderX = this.leader.positionData.values.x;
+		    this.arenaData.leaderY = this.leader.positionData.values.y;
 		}
 	}
 
