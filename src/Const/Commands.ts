@@ -15,6 +15,7 @@ import ObjectEntity from "../Entity/Object";
 import AbstractShape from "../Entity/Shape/AbstractShape";
 import Crasher from "../Entity/Shape/Crasher";
 import Pentagon from "../Entity/Shape/Pentagon";
+import Hexagon from "../Entity/Shape/Hexagon";
 import Square from "../Entity/Shape/Square";
 import Triangle from "../Entity/Shape/Triangle";
 import AutoTurret from "../Entity/Tank/AutoTurret";
