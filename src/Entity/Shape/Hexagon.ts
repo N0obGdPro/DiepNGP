@@ -32,7 +32,7 @@ export default class Hexagon extends AbstractShape {
     protected static BASE_ORBIT = AbstractShape.BASE_ORBIT / 2;
     protected static BASE_VELOCITY = AbstractShape.BASE_VELOCITY / 2;
 
-    public constructor(game: GameServer, isAlpha=false, alpha=(Math.random() < 0.0275), shiny=(Math.random() < 0.01) && !isAlpha) {
+    public constructor(game: GameServer, isAlpha=false, alpha=(Math.random() < 0.035), shiny=(Math.random() < 0.01) && !isAlpha) {
 
         if (alpha) {
           isAlpha = true;
