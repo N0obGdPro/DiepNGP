@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const AbstractShape_1 = __importDefault(require("./AbstractShape"));
-class Pentagon extends AbstractShape_1.default {
+class Hexagon extends AbstractShape_1.default {
     constructor(game, isAlpha = false, shiny = (Math.random() < 0.001) && !isAlpha) {
         super(game);
         this.nameData.values.name = isAlpha ? "Alpha Hexagon" : "Hexgon";
@@ -24,7 +24,7 @@ class Pentagon extends AbstractShape_1.default {
         }
     }
 }
-exports.default = Pentagon;
-Pentagon.BASE_ROTATION = AbstractShape_1.default.BASE_ROTATION / 2;
-Pentagon.BASE_ORBIT = AbstractShape_1.default.BASE_ORBIT / 2;
-Pentagon.BASE_VELOCITY = AbstractShape_1.default.BASE_VELOCITY / 2;
+exports.default = Hexagon;
+Hexagon.BASE_ROTATION = AbstractShape_1.default.BASE_ROTATION / 2;
+Hexagon.BASE_ORBIT = AbstractShape_1.default.BASE_ORBIT / 2;
+Hexagon.BASE_VELOCITY = AbstractShape_1.default.BASE_VELOCITY / 2;
