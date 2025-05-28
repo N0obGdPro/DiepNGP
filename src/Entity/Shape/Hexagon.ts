@@ -40,12 +40,12 @@ export default class Hexagon extends AbstractShape {
         
         super(game);
         
-        this.nameData.values.name = isAlpha ? "Omega Hexagon" : "Hexagon";
+        this.nameData.values.name = isAlpha ? "Omega Octogon" : "Hexagon";
 
-        this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 25000 : 500);
-        this.physicsData.values.size = (isAlpha ? 500 : 100) * Math.SQRT1_2;
-        this.physicsData.values.sides = 6;
-        this.styleData.values.color = shiny ? Color.Shiny : Color.EnemyHexagon;
+        this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 7500 : 500);
+        this.physicsData.values.size = (isAlpha ? 800 : 100) * Math.SQRT1_2;
+        this.physicsData.values.sides = (isAlpha ? 8 : 6);
+        this.styleData.values.color = shiny ? Color.Shiny : (isAlpha ? Color.EnemyOctogon : Color.EnemyHexagon);;
 
         this.physicsData.values.absorbtionFactor = isAlpha ? 0.05 : 0.5;
         this.physicsData.values.pushFactor = 11;
@@ -54,7 +54,7 @@ export default class Hexagon extends AbstractShape {
         this.isShiny = shiny;
 
         this.damagePerTick = isAlpha ? 100 : 18;
-        this.scoreReward = isAlpha ? 100000 : 500;
+        this.scoreReward = isAlpha ? 1000000 : 500;
         if (isAlpha) // Show name UI for alpha pentagons
 		this.nameData.values.flags ^= NameFlags.hiddenName;
         if (shiny) {
