@@ -329,7 +329,8 @@
         "upgrades": [
             2,
             14,
-            42
+            42,
+            56
         ],
         "flags": {
             "invisibility": false,
@@ -1935,7 +1936,8 @@
         "levelRequirement": 30,
         "upgrades": [
             22,
-            21
+            21,
+            56
         ],
         "flags": {
             "invisibility": false,
@@ -6642,8 +6644,6 @@
         "upgradeMessage": "",
         "levelRequirement": 45,
         "upgrades": [
-            15,
-            3
         ],
         "flags": {
             "invisibility": false,
