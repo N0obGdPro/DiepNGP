@@ -43,7 +43,7 @@ export default class Hexagon extends AbstractShape {
         this.nameData.values.name = isAlpha ? "Omega Octogon" : "Hexagon";
 
         this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 6000 : 500);
-        this.physicsData.values.size = (isAlpha ? 800 : 100) * Math.SQRT1_2;
+        this.physicsData.values.size = (isAlpha ? 500 : 100) * Math.SQRT1_2;
         this.physicsData.values.sides = (isAlpha ? 8 : 6);
         this.styleData.values.color = shiny ? Color.Shiny : (isAlpha ? Color.EnemyOctogon : Color.EnemyHexagon);;
 
