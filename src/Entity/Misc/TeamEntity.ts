@@ -37,6 +37,7 @@ export const ColorsTeamName: { [K in Color]?: string } = {
     [Color.EnemyTriangle]: "TRIANGLE",
     [Color.EnemyPentagon]: "PENTAGON",
     [Color.EnemyHexagon]: "HEXAGON",
+    [Color.EnemyOctogon]: "OCTOGON",
     [Color.EnemyCrasher]: "CRASHER",
     [Color.Neutral]: "a mysterious group",
     [Color.ScoreboardBar]: "SCOREBOARD",
