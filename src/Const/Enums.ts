@@ -69,7 +69,8 @@ export const ColorsHexCode: Record<Color, number> = {
     [Color.NecromancerSquare]: 0xFCC376,
     [Color.Fallen]: 0xC0C0C0,
     [Color.kMaxColors]: 0x000000,
-    [Color.EnemyHexagon]: 0xBF7FF5
+    [Color.EnemyHexagon]: 0xBF7FF5,
+    [Color.EnemyOctogon]: 0x28a170
 }
 
 /**
