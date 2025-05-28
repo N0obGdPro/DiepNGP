@@ -43,7 +43,8 @@ export const enum Color {
 
     kMaxColors = 18,
 
-    EnemyHexagon = 19
+    EnemyHexagon = 19,
+    EnemyOctogon = 20
 }
 
 /**
